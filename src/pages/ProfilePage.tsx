@@ -14,7 +14,7 @@ export default function ProfilePage() {
           <TabsContent value="profile" className="p-4">
             <div className="flex flex-col sm:flex-row sm:space-x-4">
               <img
-                src="/images/profileimage.jpg"
+                src={`${process.env.PUBLIC_URL}/images/profileimage.jpg`}
                 alt="Profile"
                 width={96}
                 height={96}
