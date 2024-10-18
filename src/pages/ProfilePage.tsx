@@ -71,7 +71,7 @@ export default function ProfilePage() {
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-4">
               <div className="bg-gray-200 h-20 sm:h-24 md:h-32 rounded">
                 <img
-                  src="/gifs/minecraftgif.gif"
+                  src={`${process.env.PUBLIC_URL}/gifs/minecraftgif.gif`}
                   alt="Minecraft"
                   width={200}
                   height={200}
@@ -80,7 +80,7 @@ export default function ProfilePage() {
               </div>
               <div className="bg-gray-200 h-20 sm:h-24 md:h-32 rounded">
                 <img
-                  src="/gifs/evaderoblox.gif"
+                  src={`${process.env.PUBLIC_URL}/gifs/evaderoblox.gif`}
                   alt="Evade"
                   width={200}
                   height={200}
@@ -89,7 +89,7 @@ export default function ProfilePage() {
               </div>
               <div className="bg-gray-200 h-20 sm:h-24 md:h-32 rounded">
                 <img
-                  src="/gifs/osu!mania.gif"
+                  src={`${process.env.PUBLIC_URL}/gifs/osu!mania.gif`}
                   alt="Osu!mania"
                   width={200}
                   height={200}
@@ -98,7 +98,7 @@ export default function ProfilePage() {
               </div>
               <div className="bg-gray-200 h-20 sm:h-24 md:h-32 rounded">
                 <img
-                  src="/gifs/terraria.gif"
+                  src={`${process.env.PUBLIC_URL}/gifs/terraria.gif`}
                   alt="Terraria"
                   width={200}
                   height={200}
