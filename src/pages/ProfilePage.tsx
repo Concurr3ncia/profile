@@ -15,7 +15,7 @@ export default function ProfilePage() {
           </TabsList>
           <TabsContent value="profile" className="p-4">
             <div className="flex flex-col sm:flex-row sm:space-x-20 mt-4">
-              <div className="flex flex-col sm:flex-row sm:space-x-4">
+              <div className="flex flex-col sm:flex-row sm:space-x-4 pb-4">
                 <img
                   src={`${process.env.PUBLIC_URL}/images/profileimage.jpg`}
                   alt="Profile"
