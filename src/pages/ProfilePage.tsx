@@ -173,7 +173,7 @@ export default function ProfilePage() {
           {/* Creations Tab Content */}
           <TabsContent value="creaciones" className="p-4">
             <div className='p-5 text-center'>
-              <p className='text-xl font-bold'>GitHub Repositories</p>
+              <p className='text-xl font-semibold'>GitHub Repositories</p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
                 {repos.map((repo) => (
                   <RepoCard
@@ -187,7 +187,7 @@ export default function ProfilePage() {
             </div>
 
             <div className='p-5 text-center'>
-              <p className='text-xl font-bold'>Roblox Experiences</p>
+              <p className='text-xl font-semibold'>Roblox Experiences</p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
                 {experiences.map((experience, index) => (
                   <ExperienceCard
