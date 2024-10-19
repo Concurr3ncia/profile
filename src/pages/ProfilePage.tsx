@@ -28,6 +28,8 @@ export default function ProfilePage() {
       .catch(error => console.error('Error fetching repositories:', error)); // Handle fetch error
   }, []); // Empty dependency array to run effect only once
 
+  const sortedExperiences = [...experiences].sort((a, b) => b.Plays - a.Plays);
+
   return (
     <div className="bg-gray-200 min-h-screen flex items-center justify-center p-10">
       <div className="bg-white shadow-md rounded max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl">
@@ -189,7 +191,7 @@ export default function ProfilePage() {
             <div className='p-5 text-center'>
               <p className='text-xl font-semibold'>Roblox Experiences</p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
-                {experiences.map((experience, index) => (
+                {sortedExperiences.map((experience, index) => (
                   <ExperienceCard
                     key={index}
                     name={experience.Name}
