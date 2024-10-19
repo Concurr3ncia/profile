@@ -4,16 +4,29 @@ import { FaTwitter, FaGithub } from "react-icons/fa";
 import { SiRoblox, SiOsu, SiSpotify, SiYoutube } from "react-icons/si";
 import { BsCpu, BsMotherboard, BsGpuCard } from "react-icons/bs";
 import { RiRam2Line } from "react-icons/ri";
-import RepoCard from './RepoCard'; // Asegúrate de importar el componente RepoCard
+import RepoCard from './RepoCard';
+import ExperienceCard from './ExperienceCard';
+import Games from '../experiences.json'; // Importing experiences JSON directly
+
+// Define the structure for an Experience object
+interface Experience {
+  Name: string;
+  Thumbnail: { Url: string };
+  Plays: number;
+  GameDetailReferralUrl: string;
+}
 
 export default function ProfilePage() {
-  const [repos, setRepos] = useState<any[]>([]); // Puedes definir un tipo más específico aquí
+  const [repos, setRepos] = useState<any[]>([]); // State to hold GitHub repos
+  const [experiences] = useState<Experience[]>(Games.Games); // Directly set experiences from imported JSON
 
   useEffect(() => {
+    // Fetch GitHub repositories on component mount
     fetch('https://api.github.com/users/Concurr3ncia/repos')
       .then(response => response.json())
-      .then(data => setRepos(data));
-  }, []);
+      .then(data => setRepos(data)) // Set fetched data to repos state
+      .catch(error => console.error('Error fetching repositories:', error)); // Handle fetch error
+  }, []); // Empty dependency array to run effect only once
 
   return (
     <div className="bg-gray-200 min-h-screen flex items-center justify-center p-10">
@@ -23,8 +36,11 @@ export default function ProfilePage() {
             <TabsTrigger value="profile" className="flex-1">Profile</TabsTrigger>
             <TabsTrigger value="creaciones" className="flex-1">Creaciones</TabsTrigger>
           </TabsList>
+
+          {/* Profile Tab Content */}
           <TabsContent value="profile" className="p-4">
             <div className="flex flex-col sm:flex-row sm:space-x-20 mt-4">
+              {/* Profile Picture and Information */}
               <div className="flex flex-col sm:flex-row sm:space-x-4 pb-4">
                 <img
                   src={`${process.env.PUBLIC_URL}/images/profileimage.jpg`}
@@ -39,6 +55,8 @@ export default function ProfilePage() {
                   <p>Incel | Misogino</p>
                 </div>
               </div>
+
+              {/* PC Specifications */}
               <div className="flex flex-col sm:flex-row sm:space-x-4">
                 <div className="mb-2 w-full sm:w-1/1">
                   <h4 className="font-bold pb-1">MI PC !</h4>
@@ -63,6 +81,8 @@ export default function ProfilePage() {
                 </div>
               </div>
             </div>
+
+            {/* Interests and Links */}
             <div className="flex flex-col sm:flex-row sm:space-x-4 mt-4">
               <div className="mb-4 w-full sm:w-2/3 pr-4">
                 <h4 className="font-bold pb-1">GUSTOS !</h4>
@@ -75,6 +95,7 @@ export default function ProfilePage() {
               <div className="mb-3 w-full sm:w-1/1">
                 <h4 className="font-bold pb-1">MIS COSAS !</h4>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                  {/* Social Media Links */}
                   <a href="https://x.com/Concurr3ncia" target="_blank" rel="noopener noreferrer" className="flex items-center">
                     <FaTwitter className="text-blue-500 mr-2 h-6 w-6 flex-shrink-0" />
                     <span>Concurr3ncia</span>
@@ -102,9 +123,13 @@ export default function ProfilePage() {
                 </div>
               </div>
             </div>
+
+            {/* Quote */}
             <p className="text-sm italic mb-4">
               Si vos corres, yo corro. Si vos saltas, yo salto.
             </p>
+
+            {/* GIFs Section */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-4">
               <div className="bg-gray-200 h-20 sm:h-24 md:h-32 rounded">
                 <img
@@ -144,18 +169,37 @@ export default function ProfilePage() {
               </div>
             </div>
           </TabsContent>
+
+          {/* Creations Tab Content */}
           <TabsContent value="creaciones" className="p-4">
-              <div className='p-5'>
-                  <p className='font-semibold'>Idk, cosas que hice pq estaba aburrido !</p>
+            <div className='p-5 text-center'>
+              <p className='text-xl font-bold'>GitHub Repositories</p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
+                {repos.map((repo) => (
+                  <RepoCard
+                    key={repo.id}
+                    name={repo.name}
+                    html_url={repo.html_url}
+                    created_at={repo.created_at}
+                  />
+                ))}
               </div>
-            {repos.map(repo => (
-              <RepoCard 
-                key={repo.id}
-                name={repo.name}
-                html_url={repo.html_url}
-                created_at={repo.created_at}
-              />
-            ))}
+            </div>
+
+            <div className='p-5 text-center'>
+              <p className='text-xl font-bold'>Roblox Experiences</p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
+                {experiences.map((experience, index) => (
+                  <ExperienceCard
+                    key={index}
+                    name={experience.Name}
+                    thumbnail={experience.Thumbnail.Url}
+                    plays={experience.Plays}
+                    url={experience.GameDetailReferralUrl}
+                  />
+                ))}
+              </div>
+            </div>
           </TabsContent>
         </Tabs>
       </div>
