@@ -1,17 +1,27 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../components/ui/tabs";
-import { FaTwitter } from "react-icons/fa";
+import { FaTwitter, FaGithub } from "react-icons/fa";
 import { SiRoblox, SiOsu, SiSpotify, SiYoutube } from "react-icons/si";
 import { BsCpu, BsMotherboard, BsGpuCard } from "react-icons/bs";
 import { RiRam2Line } from "react-icons/ri";
+import RepoCard from './RepoCard'; // Asegúrate de importar el componente RepoCard
 
 export default function ProfilePage() {
+  const [repos, setRepos] = useState<any[]>([]); // Puedes definir un tipo más específico aquí
+
+  useEffect(() => {
+    fetch('https://api.github.com/users/Concurr3ncia/repos')
+      .then(response => response.json())
+      .then(data => setRepos(data));
+  }, []);
+
   return (
     <div className="bg-gray-200 min-h-screen flex items-center justify-center p-10">
-      <div className="bg-white shadow-md rounded w-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl">
+      <div className="bg-white shadow-md rounded max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl">
         <Tabs defaultValue="profile" className="w-full">
-          <TabsList className="grid w-full">
-            <TabsTrigger value="profile">Profile</TabsTrigger>
+          <TabsList className="flex w-full">
+            <TabsTrigger value="profile" className="flex-1">Profile</TabsTrigger>
+            <TabsTrigger value="creaciones" className="flex-1">Creaciones</TabsTrigger>
           </TabsList>
           <TabsContent value="profile" className="p-4">
             <div className="flex flex-col sm:flex-row sm:space-x-20 mt-4">
@@ -85,6 +95,10 @@ export default function ProfilePage() {
                     <SiYoutube className="text-red-500 mr-2 h-6 w-6 flex-shrink-0" />
                     <span>Concurr3ncia</span>
                   </a>
+                  <a href="https://github.com/Concurr3ncia" target="_blank" rel="noopener noreferrer" className="flex items-center">
+                    <FaGithub className="text-gray-400 mr-2 h-6 w-6 flex-shrink-0" />
+                    <span>Concurr3ncia</span>
+                  </a>
                 </div>
               </div>
             </div>
@@ -129,6 +143,19 @@ export default function ProfilePage() {
                 />
               </div>
             </div>
+          </TabsContent>
+          <TabsContent value="creaciones" className="p-4">
+              <div className='p-5'>
+                  <p className='font-semibold'>Idk, cosas que hice pq estaba aburrido !</p>
+              </div>
+            {repos.map(repo => (
+              <RepoCard 
+                key={repo.id}
+                name={repo.name}
+                html_url={repo.html_url}
+                created_at={repo.created_at}
+              />
+            ))}
           </TabsContent>
         </Tabs>
       </div>
