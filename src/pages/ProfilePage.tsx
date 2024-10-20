@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../components/ui/tabs";
 import { FaTwitter, FaGithub } from "react-icons/fa";
-import { SiRoblox, SiOsu, SiSpotify, SiYoutube } from "react-icons/si";
+import { SiRoblox, SiOsu, SiSpotify, SiYoutube, SiSteam, SiDiscord } from "react-icons/si";
 import { BsCpu, BsMotherboard, BsGpuCard } from "react-icons/bs";
 import { RiRam2Line } from "react-icons/ri";
 import RepoCard from './RepoCard';
@@ -121,6 +121,14 @@ export default function ProfilePage() {
                   <a href="https://github.com/Concurr3ncia" target="_blank" rel="noopener noreferrer" className="flex items-center">
                     <FaGithub className="text-gray-400 mr-2 h-6 w-6 flex-shrink-0" />
                     <span>Concurr3ncia</span>
+                  </a>
+                  <a href="https://steamcommunity.com/id/Concurrencia/" target="_blank" rel="noopener noreferrer" className="flex items-center">
+                    <SiSteam className="text-blue-700 mr-2 h-6 w-6 flex-shrink-0" />
+                    <span>Concurrencia</span>
+                  </a>
+                  <a href="https://discordapp.com/users/1287258677706883183" target="_blank" rel="noopener noreferrer" className="flex items-center">
+                    <SiDiscord className="text-blue-500 mr-2 h-6 w-6 flex-shrink-0" />
+                    <span>concurrencia</span>
                   </a>
                 </div>
               </div>
